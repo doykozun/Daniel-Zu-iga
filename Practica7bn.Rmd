@@ -1,0 +1,91 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+  library(csv)
+  library(ISLR)
+  library(psych)
+  library(MASS)
+  library(foreign)
+  install.packages("data.table", dependencies = T)
+  library(data.table)
+
+```
+
+```{r}
+#cragamos el dataframe con el que trabajaremos
+datos<-read.csv("C:/Users/Daniel/Documents/cursus Udemy/r-estudio/csv/Estadistica/Practica4.csv",header = T)
+```
+```{r}
+#Mostramos los datos
+  View(datos)
+```
+
+```{r}
+#Ploteamos los datos
+  plot(datos)
+```
+```{r}
+#Generamos el coeficiente de relacion entre cajas y Distancia 
+  coef.cor<-cor(datos$Cajas,datos$Distancia)
+```
+```{r}
+#Observamos el coeficiente de relacion
+  coef.cor
+```
+```{r}
+#Generamos la matriz coeficiente de corre,acion con 3 decimales
+  m.cor<-round(cor(datos),3)
+```
+```{r}
+#Observamos la matriz
+  m.cor
+```
+
+```{r}
+#Calculamos la regresion lineal segun el problea para determinar las variables
+  regresion.m<-lm(Entrega~Cajas+Distancia, data = datos)
+```
+```{r}
+#Mostramos los datos descritivos
+  summary(regresion.m)
+```
+```{r}
+#Mostramos los inervalos de confianza con un 95%
+  confint(regresion.m, level = 0.95)
+```
+```{r}
+#Obtenemos la desviacion estandar
+  sigma(regresion.m)
+```
+```{r}
+#Obtenemos la varianza
+  sigma(regresion.m)^2
+```
+```{r}
+#Generamos la tabla nova en la cual vienen los grados de libertad para cada muestra 
+  anova(regresion.m)
+```
+
+```{r}
+#obtenemos los coeficientes de correacion
+  regresion.m$coefficients
+```
+```{r}
+#Obtenemos las prediciones del modelo
+  predict(regresion.m)
+```
+
+
+
+
+
+
